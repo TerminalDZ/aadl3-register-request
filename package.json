@@ -1,4 +1,35 @@
 {
   "name": "aadl3",
-  "packageManager": "yarn@4.3.1"
+  "version": "1.0.0",
+  "packageManager": "yarn@4.3.1",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "add": "^2.0.6",
+    "node-fetch": "^3.3.2",
+    "node-notifier": "^10.0.1",
+    "play-sound": "^1.1.6",
+    "yarn": "^1.22.22"
+  },
+  "build": {
+    "appId": "com.aadl3.register",
+    "win": {
+      "target": "nsis"
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "notification.wav",
+      "aadl3.js",
+      "package.json"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^31.2.1",
+    "electron-builder": "^24.13.3"
+  }
 }

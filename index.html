@@ -1,0 +1,257 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
+    <title>AADL3</title>
+</head>
+<style>
+    *,
+    h1 {
+        font-family: 'Noto Kufi Arabic', sans-serif;
+    }
+</style>
+
+<body style="padding:40px;">
+    <h1>المعلومات</h1>
+    <label for="a17">ولاية الإقامة</label>
+    <select name="A17" size="1" id="a17" title="الولاية المختارة عند التسجيل يجب أن تثبت بشهادة إقامة سارية المفعول">
+        <option value="1">
+            ----------
+        </option>
+        <option value="2">
+            1-أدرار
+        </option>
+        <option value="3">
+            2-الشلف
+        </option>
+        <option value="4">
+            3-الأغواط
+        </option>
+        <option value="5">
+            4-أم
+            البواقي
+        </option>
+        <option value="6">
+            5-باتنة
+        </option>
+        <option value="7">
+            6-بجاية
+        </option>
+        <option value="8">
+            7-بسكرة
+        </option>
+        <option value="9">
+            8-بشار
+        </option>
+        <option value="10">
+            9-البليدة
+        </option>
+        <option value="11">
+            10-البويرة
+        </option>
+        <option value="12">
+            11-تمنراست
+        </option>
+        <option value="13">
+            12-تبسة
+        </option>
+        <option value="14">
+            13-تلمسان
+        </option>
+        <option value="15">
+            14-تيارت
+        </option>
+        <option value="16">
+            15-تيزي
+            وزو
+        </option>
+        <option value="17">
+            16-الجزائر
+        </option>
+        <option value="18">
+            17-الجلفة
+        </option>
+        <option value="19">
+            18-جيجل
+        </option>
+        <option value="20">
+            19-سطيف
+        </option>
+        <option value="21">
+            20-سعيدة
+        </option>
+        <option value="22">
+            21-سكيكدة
+        </option>
+        <option value="23">
+            22-سيدي
+            بلعباس
+        </option>
+        <option value="24">
+            23-عنابة
+        </option>
+        <option value="25">
+            24-قالمة
+        </option>
+        <option value="26">
+            25-قسنطينة
+        </option>
+        <option value="27">
+            26-المدية
+        </option>
+        <option value="28">
+            27-مستغانم
+        </option>
+        <option value="29">
+            28-المسيلة
+        </option>
+        <option value="30">
+            29-معسكر
+        </option>
+        <option value="31">
+            30-ورقلة
+        </option>
+        <option value="32">
+            31-وهران
+        </option>
+        <option value="33">
+            32-البيض
+        </option>
+        <option value="34">
+            33-إليزي
+        </option>
+        <option value="35">
+            34-برج
+            بوعريريج
+        </option>
+        <option value="36">
+            35-بومرداس
+        </option>
+        <option value="37">
+            36-الطارف
+        </option>
+        <option value="38">
+            37-تندوف
+        </option>
+        <option value="39">
+            38-تيسمسيلت
+        </option>
+        <option value="40">
+            39-الوادي
+        </option>
+        <option value="41">
+            40-خنشلة
+        </option>
+        <option value="42">
+            41-سوق
+            أهراس
+        </option>
+        <option value="43" selected="selected">
+            42-تيبازة
+        </option>
+        <option value="44">
+            43-ميلة
+        </option>
+        <option value="45">
+            44-عين
+            الدفلة
+        </option>
+        <option value="46">
+            45-النعامة
+        </option>
+        <option value="47">
+            46-عين
+            تيموشنت
+        </option>
+        <option value="48">
+            47-غرداية
+        </option>
+        <option value="49">
+            48-غيليزان
+        </option>
+        <option value="50">
+            49-تيميمون
+        </option>
+        <option value="51">
+            50-برج
+            باجي
+            مختار
+        </option>
+        <option value="52">
+            51-أولاد
+            جلال
+        </option>
+        <option value="53">
+            52-بني
+            عباس
+        </option>
+        <option value="54">
+            53-إن
+            صالح
+        </option>
+        <option value="55">
+            54-إن
+            قزام
+        </option>
+        <option value="56">
+            55-توقرت
+        </option>
+        <option value="57">
+            56-جانت
+        </option>
+        <option value="58">
+            57-المغير
+        </option>
+        <option value="59">
+            58-المنيعة
+        </option>
+    </select>
+    <label for="a22">رقم التعريف الوطني - NIN</label>
+    <input type="number"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="18" id="a22"><br>
+
+    <label for="a27">رقم الضمان الإجتماعي - NSS</label>
+    <input type="number"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="13" id="a27"><br>
+
+    <label for="a13">رقم الهاتف النقال</label>
+    <input type="number"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="10" id="a13"><br>
+
+
+    <button id="start">التسجيل</button>
+    <button id="stop" disabled>ايقاف</button>
+    <label id="response"></label>
+    <label id="retryMessage" style="color: red;"></label>
+
+    <details id="settingsPanel" style="padding: 20px;">
+        <summary>الاعدادات</summary>
+        <div>
+            <label for="retryInterval">وقت اعادة المحاولة (ms):</label>
+            <input type="number" id="retryInterval" value="5000"><br>
+
+            <label for="maxRetries">عدد المحاولات:</label>
+            <input type="number" id="maxRetries" value="10000"><br>
+
+            <label for="cookie"> كوكيز:</label>
+            <input type="text" id="cookie"
+                value="cookiesession1=678A3E144B1A9B57793FB32FA8A19977; PHPSESSID=o2cgnhppekmkgor3jpm0pb2mg3; wbNavigateurLargeur=1426">
+        </div>
+    </details>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+
+
+    <script src="aadl3.js"></script>
+</body>
+
+</html>
