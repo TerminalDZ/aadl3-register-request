@@ -25,13 +25,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'yarn'
+          node-version: "20"
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install
 
       - name: Build and Publish
-        run: yarn publish
+        run: yarn publish_app
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

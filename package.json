@@ -14,7 +14,7 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --publish=never",
-    "publish": "electron-builder --publish always"
+    "publish_app": "electron-builder --publish always"
   },
   "dependencies": {
     "play-sound": "^1.1.6"
