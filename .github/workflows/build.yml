@@ -25,83 +25,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "yarn"
+          node-version: '20'
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install
 
-      - name: Build
-        run: yarn build
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-${{ matrix.os }}
-          path: dist/*
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Download Artifacts (Ubuntu)
-        uses: actions/download-artifact@v3
-        with:
-          name: app-ubuntu-latest
-          path: dist/linux
-        if: always()
-
-      - name: Download Artifacts (Windows)
-        uses: actions/download-artifact@v3
-        with:
-          name: app-windows-latest
-          path: dist/win
-        if: always()
-
-      - name: Create Release
-        id: create_release
-        run: |
-          tag_name="v${{ github.run_number }}"
-          release_name="Release ${{ github.run_number }}"
-          body="This release includes the latest build of the Electron app."
-          GITHUB_API_URL="https://api.github.com"
-          response=$(curl -s --request POST \
-            --url "$GITHUB_API_URL/repos/${{ github.repository }}/releases" \
-            --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            --header "content-type: application/json" \
-            --data "{
-              \"tag_name\": \"$tag_name\",
-              \"name\": \"$release_name\",
-              \"body\": \"$body\",
-              \"draft\": false,
-              \"prerelease\": false
-            }")
-          echo "$response"
-          upload_url=$(echo "$response" | jq -r .upload_url)
-          echo "upload_url=$upload_url" >> $GITHUB_ENV
+      - name: Build and Publish
+        run: yarn publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload Release Asset (Ubuntu)
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ env.upload_url }}
-          asset_path: dist/linux/*
-          asset_name: linux-build-${{ github.run_number }}
-          asset_content_type: application/octet-stream
-        if: always()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload Release Asset (Windows)
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ env.upload_url }}
-          asset_path: dist/win/*
-          asset_name: windows-build-${{ github.run_number }}
-          asset_content_type: application/octet-stream
-        if: always()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
