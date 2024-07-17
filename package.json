@@ -10,7 +10,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder --publish=never"
   },
   "dependencies": {
     "play-sound": "^1.1.6"
@@ -18,12 +18,14 @@
   "build": {
     "appId": "com.aadl3.register",
     "win": {
+      "icon": "./build/favicon.png",
       "target": [
         "nsis",
         "zip"
       ]
     },
     "linux": {
+      "icon": "./build/favicon.png",
       "target": [
         "AppImage",
         "deb"
