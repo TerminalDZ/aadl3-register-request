@@ -30,10 +30,6 @@ function toggleButtons() {
   startButton.disabled = isRunning;
   startButton.setAttribute("aria-busy", isRunning);
   stopButton.disabled = !isRunning;
-  if (!isRunning) {
-    responseElement.innerHTML = "";
-    retryMessage.innerHTML = "";
-  }
 }
 const headers = new Headers({
   "content-type": "application/x-www-form-urlencoded",
@@ -87,14 +83,14 @@ async function makeRequest() {
   };
   const controller = new AbortController();
   const timeout = setTimeout(() => {
-    controller.abort();
+    controller.abort("الحد الأقصى للانتظار");
   }, retryInterval); // Set a timeout of 5 seconds
 
   try {
     if (!a22 || !a27 || !a13 || !a17) {
-      throw Error("المعلومات ناقصة");
-    } else {
-      responseElement.innerHTML = "";
+      isRunning = false;
+      toggleButtons();
+      return;
     }
     const response = await fetch(url, {
       method: "POST",
@@ -124,21 +120,12 @@ async function makeRequest() {
     }
   } catch (error) {
     clearTimeout(timeout);
-    if (
-      (error.name === "AbortError" || error.code === "ETIMEDOUT") &&
-      retryCount < maxRetries
-    ) {
-      retryCount++;
-      retryMessage.innerHTML = `اعادة المحاولة رقم... (${retryCount})`; // Show retry message
-      setTimeout(() => {
-        // retryMessage.innerHTML = ""; // Clear the message after a short delay
-        makeRequest(); // Wait 1 second before retrying
-      }, 1000); // Delay before retrying
-    } else {
-      responseElement.innerHTML = error;
-      retryMessage.innerHTML = ""; // Clear the message if not retrying
-      isRunning = false;
-      toggleButtons();
-    }
+    retryCount++;
+    responseElement.innerHTML = error;
+    retryMessage.innerHTML = `اعادة المحاولة رقم... (${retryCount})`; // Show retry message
+    setTimeout(() => {
+      // retryMessage.innerHTML = ""; // Clear the message after a short delay
+      makeRequest(); // Wait 1 second before retrying
+    }, 1000); // Delay before retrying
   }
 }
