@@ -1,4 +1,9 @@
 {
+  "author": {
+    "name": "bilobom",
+    "email": "bilobom124@gmail.com"
+  },
+  "homepage": "https://github.com/bilobom/aadl3-register-app",
   "name": "aadl3",
   "version": "1.0.0",
   "packageManager": "yarn@1.22.19",
@@ -22,7 +27,8 @@
       "target": [
         "AppImage",
         "deb"
-      ]
+      ],
+      "maintainer": "@bilobom"
     },
     "files": [
       "main.js",
