@@ -3,7 +3,7 @@ name: Build Electron App
 on:
   push:
     branches:
-      - main # Triggers on any push to the main branch
+      - main
 
 jobs:
   build:
@@ -19,8 +19,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
-          cache: "yarn"
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install Yarn 4
+        run: |
+          npm install --global yarn@4.3.1
+          yarn --version  # Verify installation
 
       - name: Install dependencies
         run: yarn install
@@ -33,7 +38,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ github.run_number }}
-          name: Release ${{ github.run_number }} # Change here
+          name: Release ${{ github.run_number }}
           body: |
             This release includes the latest build of the Electron app.
         env:
