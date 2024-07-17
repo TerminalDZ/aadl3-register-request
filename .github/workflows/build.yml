@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write # Ensures the GITHUB_TOKEN has permission to write to the repository
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -44,13 +47,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Download Artifacts
+      - name: Download Artifacts (Ubuntu)
         uses: actions/download-artifact@v3
         with:
           name: app-ubuntu-latest
           path: dist/linux
         if: always()
-      - name: Download Artifacts
+
+      - name: Download Artifacts (Windows)
         uses: actions/download-artifact@v3
         with:
           name: app-windows-latest
@@ -59,21 +63,46 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ github.run_number }}
-          name: Release ${{ github.run_number }}
-          body: |
-            This release includes the latest build of the Electron app.
+        run: |
+          tag_name="v${{ github.run_number }}"
+          release_name="Release ${{ github.run_number }}"
+          body="This release includes the latest build of the Electron app."
+          GITHUB_API_URL="https://api.github.com"
+          response=$(curl -s --request POST \
+            --url "$GITHUB_API_URL/repos/${{ github.repository }}/releases" \
+            --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            --header "content-type: application/json" \
+            --data "{
+              \"tag_name\": \"$tag_name\",
+              \"name\": \"$release_name\",
+              \"body\": \"$body\",
+              \"draft\": false,
+              \"prerelease\": false
+            }")
+          echo "$response"
+          id=$(echo "$response" | jq -r .id)
+          echo "Release ID: $id"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Release Artifacts
-        uses: softprops/action-gh-release@v1
+      - name: Upload Release Asset (Ubuntu)
+        uses: actions/upload-release-asset@v1
         with:
-          tag_name: v${{ github.run_number }}
-          files: |
-            dist/linux/*
-            dist/win/*
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/linux/*
+          asset_name: linux-build-${{ github.run_number }}
+          asset_content_type: application/octet-stream
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset (Windows)
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/win/*
+          asset_name: windows-build-${{ github.run_number }}
+          asset_content_type: application/octet-stream
+        if: always()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
