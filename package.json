@@ -18,14 +18,14 @@
   "build": {
     "appId": "com.aadl3.register",
     "win": {
-      "icon": "./build/favicon.png",
+      "icon": "./logo.png",
       "target": [
         "nsis",
         "zip"
       ]
     },
     "linux": {
-      "icon": "./build/favicon.png",
+      "icon": "./logo.png",
       "target": [
         "AppImage",
         "deb"
