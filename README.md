@@ -1,6 +1,6 @@
 # AADL3 Registration App
 
-AADL3 is an Electron application designed to automate the registration process for the AADL3 website. The app continuously monitors the registration page and retries the request until successful, notifying the user with a sound upon successful registration.
+AADL3 is an cross-platform application designed to automate the registration process for the AADL3 website. The app continuously monitors the registration page and retries the request until successful, notifying the user with a sound upon successful registration.
 
 ![](front.png)
 ## Features
@@ -9,10 +9,15 @@ AADL3 is an Electron application designed to automate the registration process f
 - Retries requests upon timeout or failure.
 - Notifies user with a sound upon successful registration.
 
+## Download
+
+See the [release](./releases) page to download windows installer or linux AppImage
+
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) (v14 or later recommended)
-- [Yarn](https://yarnpkg.com/) (v4.3.1 or later)
+- [Yarn](https://yarnpkg.com/) (v1.x or later)
 
 ## Installation
 

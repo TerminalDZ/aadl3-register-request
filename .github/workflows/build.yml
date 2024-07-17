@@ -1,4 +1,4 @@
-name: Build Electron App
+name: Build the App
 
 on:
   push:
@@ -15,21 +15,47 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Enable Corepack
         run: corepack enable
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'yarn'
+          node-version: "20"
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install
 
       - name: Build
         run: yarn build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-${{ matrix.os }}
+          path: dist/*
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: app-ubuntu-latest
+          path: dist/linux
+        if: always()
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: app-windows-latest
+          path: dist/win
+        if: always()
 
       - name: Create Release
         id: create_release
@@ -42,10 +68,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Artifacts
+      - name: Upload Release Artifacts
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ github.run_number }}
-          files: dist/*
+          files: |
+            dist/linux/*
+            dist/win/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

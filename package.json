@@ -13,7 +13,16 @@
   "build": {
     "appId": "com.aadl3.register",
     "win": {
-      "target": "nsis"
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
     },
     "files": [
       "main.js",
