@@ -2,6 +2,7 @@
 
 AADL3 is an Electron application designed to automate the registration process for the AADL3 website. The app continuously monitors the registration page and retries the request until successful, notifying the user with a sound upon successful registration.
 
+![](front.png)
 ## Features
 
 - Automates form submission to AADL3 registration page.
