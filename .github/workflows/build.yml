@@ -15,18 +15,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
       - name: Enable Corepack
         run: corepack enable
+        
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'yarn'
-
-      - name: Install Yarn 4
-        run: |
-          npm install --global yarn@4.3.1
-          yarn --version  # Verify installation
 
       - name: Install dependencies
         run: yarn install
