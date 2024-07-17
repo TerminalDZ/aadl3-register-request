@@ -39,7 +39,6 @@ jobs:
         with:
           name: app-${{ matrix.os }}
           path: dist/*
-
   release:
     runs-on: ubuntu-latest
     needs: build
@@ -80,15 +79,15 @@ jobs:
               \"prerelease\": false
             }")
           echo "$response"
-          id=$(echo "$response" | jq -r .id)
-          echo "Release ID: $id"
+          upload_url=$(echo "$response" | jq -r .upload_url)
+          echo "upload_url=$upload_url" >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Release Asset (Ubuntu)
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ env.upload_url }}
           asset_path: dist/linux/*
           asset_name: linux-build-${{ github.run_number }}
           asset_content_type: application/octet-stream
@@ -99,7 +98,7 @@ jobs:
       - name: Upload Release Asset (Windows)
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ env.upload_url }}
           asset_path: dist/win/*
           asset_name: windows-build-${{ github.run_number }}
           asset_content_type: application/octet-stream
