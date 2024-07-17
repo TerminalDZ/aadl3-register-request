@@ -10,7 +10,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --publish=never",,
+    "build": "electron-builder --publish=never",
     "publish": "electron-builder --publish always"
   },
   "dependencies": {
