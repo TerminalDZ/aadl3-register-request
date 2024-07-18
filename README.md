@@ -2,6 +2,8 @@
 
 AADL3 Registration Application is an Electron-based desktop application designed to automate the registration process for AADL3. The application uses a form to collect user data and then sends this data to a server for processing. The application can also save, update, and delete user data locally.
 
+
+
 ## Features
 
 - Collect user data through a form.
@@ -10,6 +12,12 @@ AADL3 Registration Application is an Electron-based desktop application designed
 - Display user data in a modal.
 - Play a notification sound when data is successfully processed.
 - Retry mechanism for data submission.
+## Download
+See the [releases](https://github.com/TerminalDZ/aadl3-register-request/releases) page to download the latest version of the application.
+
+## Prerequisites
+
+To run the application, you need to have [Node.js](https://nodejs.org) and [Yarn](https://yarnpkg.com) installed on your system.
 
 ## Installation
 
@@ -68,6 +76,7 @@ The application includes a settings panel where you can configure:
 - `aadl3.js`: The renderer process script that handles the form and user interactions.
 - `info.json`: The local data storage file.
 - `package.json`: The project configuration file.
+- `notification`: The notification sound file.
 
 ## Development
 
@@ -111,6 +120,14 @@ For any questions or feedback, please contact the author at [boukemoucheidriss@g
 - عرض بيانات المستخدم في نافذة منبثقة.
 - تشغيل صوت إشعار عند معالجة البيانات بنجاح.
 - آلية إعادة المحاولة لإرسال البيانات.
+
+## التنزيل
+
+انظر صفحة [الإصدارات](https://github.com/TerminalDZ/aadl3-register-request/releases) لتنزيل أحدث إصدار من التطبيق.
+
+## المتطلبات
+
+لتشغيل التطبيق، يجب أن يكون لديك [Node.js](https://nodejs.org) و[Yarn](https://yarnpkg.com) مثبتين على نظامك.
 
 ## التثبيت
 
