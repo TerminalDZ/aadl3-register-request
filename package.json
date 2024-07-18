@@ -1,9 +1,9 @@
 {
   "author": {
-    "name": "bilobom",
-    "email": "bilobom124@gmail.com"
+    "name": "idriss boukmouche",
+    "email": "boukemoucheidriss@gmail.com"
   },
-  "homepage": "https://github.com/bilobom/aadl3-register-app",
+  "homepage": "https://github.com/TerminalDZ/aadl3-register-request",
   "name": "aadl3",
   "version": "1.0.0",
   "packageManager": "yarn@1.22.19",
