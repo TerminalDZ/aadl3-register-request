@@ -13,3 +13,5 @@
 .pnp.*
 dist
 node_modules
+info.json
+

@@ -1,93 +1,100 @@
-# AADL3 Registration App
+# AADL3 Registration Application
 
-AADL3 is an cross-platform application designed to automate the registration process for the AADL3 website. The app continuously monitors the registration page and retries the request until successful, notifying the user with a sound upon successful registration.
+AADL3 Registration Application is an Electron-based desktop application designed to automate the registration process for AADL3. The application uses a form to collect user data and then sends this data to a server for processing. The application can also save, update, and delete user data locally.
 
-![](front.png)
 ## Features
 
-- Automates form submission to AADL3 registration page.
-- Retries requests upon timeout or failure.
-- Notifies user with a sound upon successful registration.
-
-## Download
-
-See the [release](./releases) page to download windows installer or linux AppImage
-
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) (v14 or later recommended)
-- [Yarn](https://yarnpkg.com/) (v1.x or later)
+- Collect user data through a form.
+- Send collected data to a server for processing.
+- Save, update, and delete user data locally.
+- Display user data in a modal.
+- Play a notification sound when data is successfully processed.
+- Retry mechanism for data submission.
 
 ## Installation
 
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/aadl3.git
-cd aadl3
-```
+To install and run the application, follow these steps:
 
-2. Install the dependencies
-```bash
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/TerminalDZ/aadl3-register-request.git
+    cd aadl3-register-request
+    ```
 
-yarn install
-```
+2. **Install dependencies:**
+    ```bash
+    yarn install
+    ```
+
+3. **Start the application:**
+    ```bash
+    yarn start
+    ```
 
 ## Usage
 
-### Development
+1. **Starting the Application:**
+    - Click the "التسجيل" button to start the registration process.
+    - Click the "ايقاف" button to stop the registration process.
 
-To start the application in development mode:
+2. **Adding Data:**
+    - Click the "إضافة" button to open a modal for adding new data.
+    - Fill in the form and click "حفظ" to save the new data.
 
-```bash
-yarn start
-```
+3. **Updating Data:**
+    - Click the "عرض البيانات" button to view existing data.
+    - Click the "تعديل" button on any data card to open a modal for updating data.
+    - Fill in the form and click "حفظ التعديلات" to save the changes.
 
-### Build
+4. **Deleting Data:**
+    - Click the "عرض البيانات" button to view existing data.
+    - Click the "حذف" button on any data card to delete the data.
 
-To build the application for production:
-
-```bash
-yarn build
-```
-
+5. **Selecting Data:**
+    - Click the "عرض البيانات" button to view existing data.
+    - Click the "اختيار" button on any data card to fill the form with the selected data.
 
 ## Configuration
 
-Ensure you have the following files in the project root:
+The application includes a settings panel where you can configure:
+- Retry interval (in milliseconds)
+- Maximum number of retries
+- Cookie value
 
-- `main.js`
-- `index.html`
-- `notification.wav`
-- `aadl3.js`
-- `package.json`
+## File Structure
 
-## Project Structure
+- `index.html`: The main HTML file for the application.
+- `main.js`: The main Electron process script.
+- `aadl3.js`: The renderer process script that handles the form and user interactions.
+- `info.json`: The local data storage file.
+- `package.json`: The project configuration file.
 
-```
+## Development
 
-aadl3/
-    ├── main.js
-    ├── index.html
-    ├── notification.wav
-    ├── aadl3.js
-    ├── package.json
-    └── README.md
+To build and publish the application:
 
-```
+1. **Build the application:**
+    ```bash
+    yarn build
+    ```
 
-## Scripts
+2. **Publish the application:**
+    ```bash
+    yarn publish_app
+    ```
 
-- `yarn start`: Starts the Electron application.
-- `yarn build`: Builds the Electron application using `electron-builder`.
+## Contributing
 
-## Dependencies
+If you would like to contribute to this project, please follow these steps:
 
-- [play-sound](https://www.npmjs.com/package/play-sound) - A simple library to play sounds.
+1. Fork the repository.
+2. Create a new branch: `git checkout -b my-feature-branch`.
+3. Make your changes and commit them: `git commit -m 'Add my feature'`.
+4. Push to the branch: `git push origin my-feature-branch`.
+5. Submit a pull request.
 
-## Dev Dependencies
 
-- [electron](https://www.electronjs.org/) - Build cross-platform desktop apps with JavaScript, HTML, and CSS.
-- [electron-builder](https://www.electron.build/) - A complete solution to package and build a ready-for-distribution Electron app.
+## Contact
 
+For any questions or feedback, please contact the author at [boukemoucheidriss@gmail.com](mailto:boukemoucheidriss@gmail.com).
 

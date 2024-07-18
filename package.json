@@ -17,7 +17,8 @@
     "publish_app": "electron-builder --publish always"
   },
   "dependencies": {
-    "play-sound": "^1.1.6"
+    "play-sound": "^1.1.6",
+    "fs": "^0.0.1-security"
   },
   "build": {
     "appId": "com.aadl3.register",
@@ -47,6 +48,7 @@
       "index.html",
       "notification.wav",
       "aadl3.js",
+      "info.json",
       "package.json"
     ]
   },

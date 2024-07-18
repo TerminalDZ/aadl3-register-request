@@ -1,44 +1,73 @@
-// main.js
-const { app, BrowserWindow, ipcMain } = require("electron");
-const path = require("path");
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+const fs = require('fs');
 
 function createWindow() {
-  const win = new BrowserWindow({
-    width: 720,
-    height: 720,
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
 
-  win.loadFile("index.html");
-  // Open the DevTools initially
-  // win.webContents.openDevTools();
+  mainWindow.loadFile('index.html');
 }
 
-app.whenReady().then(createWindow);
+app.on('ready', createWindow);
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-app.on("activate", () => {
+app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
 });
 
-// Handle toggle-devtools IPC message
-ipcMain.on("toggle-devtools", (event) => {
-  const win = BrowserWindow.fromWebContents(event.sender);
-  if (win) {
-    if (win.webContents.isDevToolsOpened()) {
-      win.webContents.closeDevTools();
-    } else {
-      win.webContents.openDevTools();
+ipcMain.handle("get-data", () => {
+  const data = fs.readFileSync("info.json", "utf-8");
+  return JSON.parse(data);
+});
+
+ipcMain.handle("save-response", (event, { NIN, TEL, responseText }) => {
+  const fileName = `${NIN}_${TEL}.txt`;
+  fs.writeFileSync(fileName, responseText, 'utf-8');
+
+  const data = JSON.parse(fs.readFileSync("info.json", "utf-8"));
+  const updatedData = data.map(item => {
+    if (item.NIN === NIN) {
+      return { ...item, processed: true };
     }
-  }
+    return item;
+  });
+  fs.writeFileSync("info.json", JSON.stringify(updatedData, null, 2));
+});
+
+ipcMain.handle("add-data", (event, newData) => {
+  const data = JSON.parse(fs.readFileSync("info.json", "utf-8"));
+  data.push({ ...newData, processed: false });
+  fs.writeFileSync("info.json", JSON.stringify(data, null, 2));
+});
+
+ipcMain.handle("update-data", (event, updatedData) => {
+  const data = JSON.parse(fs.readFileSync("info.json", "utf-8"));
+  const updatedDataList = data.map(item => {
+    if (item.NIN === updatedData.NIN) {
+      return { ...item, ...updatedData, processed: false };
+    }
+    return item;
+  });
+  fs.writeFileSync("info.json", JSON.stringify(updatedDataList, null, 2));
+});
+
+ipcMain.handle("delete-data", (event, NIN) => {
+  const data = JSON.parse(fs.readFileSync("info.json", "utf-8"));
+  const updatedDataList = data.filter(item => item.NIN !== NIN);
+  fs.writeFileSync("info.json", JSON.stringify(updatedDataList, null, 2));
 });
