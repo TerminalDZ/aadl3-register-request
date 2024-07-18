@@ -21,7 +21,7 @@
     "fs": "^0.0.1-security"
   },
   "build": {
-    "appId": "com.aadl3.register",
+    "appId": "com.aadl3.request",
     "win": {
       "icon": "./logo.png",
       "target": [
@@ -35,7 +35,7 @@
         "AppImage",
         "deb"
       ],
-      "maintainer": "@bilobom"
+      "maintainer": "@TerminalDZ"
     },
     "publish": [
       {
