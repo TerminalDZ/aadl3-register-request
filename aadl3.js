@@ -35,7 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   saveNewDataButton.addEventListener("click", async () => {
     const newData = collectNewFormData();
-    await ipcRenderer.invoke("add-data", newData);
+    const data = {
+      NOM: newData.NOM,
+      WIL: newData.WIL,
+      NIN: newData.NIN,
+      NSS: newData.NSS,
+      TEL: newData.TEL,
+      processed: false,
+    }
+
+    await ipcRenderer.invoke("add-data", data);
     alert("Data added successfully!");
     const addDataModal = bootstrap.Modal.getInstance(document.getElementById('addDataModal'));
     addDataModal.hide();
