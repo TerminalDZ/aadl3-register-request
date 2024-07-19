@@ -205,7 +205,10 @@ If you would like to contribute to this project, please follow these steps:
 
 5. Submit a pull request.
 
-  
+
+## Thanks
+
+[Bilobom](https://github.com/bilobom).
 
 ## Contact
 
@@ -425,7 +428,9 @@ yarn publish_app
 
 5. تقديم طلب دمج.
 
-  
+## شكرا
+
+[Bilobom](https://github.com/bilobom).
 
 ## الاتصال
 
